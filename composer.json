@@ -11,12 +11,17 @@
     {
       "type": "vcs",
       "url": "https://github.com/alexstocker/3dviewer-for-owncloud.git"
+    },
+    {
+      "type": "vcs",
+      "url": "https://github.com/alexstocker/domain-manager-for-owncloud.git"
     }
   ],
   "require": {
     "php": ">=7.2 || >=7.4",
     "alexstocker/sensorlogger": "dev-0.1-devel",
-    "alexstocker/3dviewer-for-owncloud": "dev-1.0-devel"
+    "alexstocker/3dviewer-for-owncloud": "dev-1.0-devel",
+    "alexstocker/domain-manager-for-owncloud": "dev-0.1-devel"
   },
   "require-dev": {
   },
@@ -38,11 +43,15 @@
     "link-3dviewer": [
       "if [ ! -e \"files_3dviewer\" ]; then ln -s vendor/alexstocker/3dviewer-for-owncloud files_3dviewer; fi"
     ],
+    "link-domainmanager": [
+      "if [ ! -e \"domain_manager\" ]; then ln -s vendor/alexstocker/domain-manager-for-owncloud domain_manager; fi"
+    ],
     "cleanup": [
       "docker volume rm owncloud-docker-development_redis owncloud-docker-development_backup owncloud-docker-development_mysql --force",
       "rm -fv tmp/logs/*",
       "rm sensorlogger",
       "rm files_3dviewer",
+      "rm domain_manager",
       "rm .env"
     ],
     "add-env-files": [
@@ -52,6 +61,7 @@
       "@add-env-files",
       "@link-sensorlogger",
       "@link-3dviewer",
+      "@link-domainmanager",
       "docker-compose pull",
       "docker-compose up -d --force-recreate --remove-orphans"
     ],
@@ -78,7 +88,8 @@
       "docker cp overwrite.config.php.dist owncloud_server:/mnt/data/config/overwrite.config.php",
       "docker exec -tu root owncloud_server entrypoint bash -c 'cat /mnt/data/config/overwrite.config.php'",
       "docker exec -tu root owncloud_server entrypoint bash -c 'runuser -u www-data ./occ app:enable sensorlogger'",
-      "docker exec -tu root owncloud_server entrypoint bash -c 'runuser -u www-data ./occ app:enable files_3dviewer'"
+      "docker exec -tu root owncloud_server entrypoint bash -c 'runuser -u www-data ./occ app:enable files_3dviewer'",
+      "docker exec -tu root owncloud_server entrypoint bash -c 'runuser -u www-data ./occ app:enable domain_manager'"
     ]
   }
 }

@@ -2,6 +2,7 @@
 
 ### 1.0.1 (UNRELEASED)
 * [NOREF] FIXED Missing entrypoint on docker exec to get set env vars
+* [NOREF] ADDED Domain Manager for owncloud support
 * [NOREF] ADDED builer and _signing volumes for app signing purpose
 * [NOREF] ADDED `composer enable-apps`
 * [NOREF] UPDATED to Owncloud 10.13.4
