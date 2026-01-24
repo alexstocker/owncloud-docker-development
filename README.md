@@ -21,7 +21,7 @@ but with some tweaks suitable for others too.
 ### Install
 1. your@machine:$ `git clone https://github.com/alexstocker/owncloud-docker-development.git`
 2. your@machine:$ `cd owncloud-docker-development`
-3. your@machine:...owncloud-docker-development$ `composer install` (--ignore-platform-reqs may be required if your local php version is not outdated ;-) 
+3. your@machine:...owncloud-docker-development$ `composer install --prefer-source` (--ignore-platform-reqs may be required if your local php version is not outdated ;-) 
 4. your@machine:...owncloud-docker-development$ `composer docker-up`
 5. your@machine:...owncloud-docker-development$ `sudo chown -Rf [USER]:[GROUP] vendor/` (adjust [USER] and [GROUP] to fit your needs)
 6. open browser goto http://localhost:8080/ (have a look at .env for username and password) and login
