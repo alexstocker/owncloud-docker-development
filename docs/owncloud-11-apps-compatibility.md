@@ -5,7 +5,7 @@
 | contacts       |                             |      `🟢`      | `🟢`           |             |
 | calendar       |                             |      `🟢`      | `🔴`           |             |
 | passman        |                             |      `🟢`      | `🟢`           |             |
-| tasks          |                             |      `🟢`     | `🟡`            |             |
+| tasks          |                             |      `🟡`      | `🟢`             |             |
 | sensorlogger   |                             |      `🟢`      | `⚪`           |             |
 | files_3dviewer |                             |      `🟢`      | `⚪`           |             |
 | domain_manager |                             |      `🟢`      | `⚪`           |             |
