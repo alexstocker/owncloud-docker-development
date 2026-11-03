@@ -6,23 +6,23 @@
   "repositories": [
     {
       "type": "vcs",
-      "url": "https://github.com/alexstocker/sensorlogger.git"
+      "url": "https://git@github.com/alexstocker/sensorlogger.git"
     },
     {
       "type": "vcs",
-      "url": "https://github.com/alexstocker/3dviewer-for-owncloud.git"
+      "url": "https://git@github.com/alexstocker/3dviewer-for-owncloud.git"
     },
     {
       "type": "vcs",
-      "url": "https://github.com/alexstocker/domain-manager-for-owncloud.git"
+      "url": "https://git@github.com/alexstocker/domain-manager-for-owncloud.git"
     },
     {
       "type": "vcs",
-      "url": "https://github.com/alexstocker/owncloud-contacts.git"
+      "url": "https://git@github.com/alexstocker/owncloud-contacts.git"
     },
     {
       "type": "vcs",
-      "url": "https://github.com/alexstocker/owncloud-calendar.git"
+      "url": "https://git@github.com/alexstocker/owncloud-calendar.git"
     }
   ],
   "require": {
