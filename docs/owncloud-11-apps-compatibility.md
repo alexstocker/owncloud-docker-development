@@ -14,10 +14,12 @@
 ## Rainloop
 * Sources from https://github.com/RainLoop/rainloop-webmail/releases/tag/v1.17.0 required
 * `🟡` logout from owncloud with activated rainloop app causes internal server error (500)
+  * Solution/**Workaround**
+    * `include_once OC_App::getAppPath('rainloop').'/lib/RainLoopHelper.php';` to fix ownCloud 11 failed to autoload RainLoop’s legacy OC_RainLoop_Helper class when invoking its logout hook.
 
 ## Calendar
 * `🔴` `npm install` fails on "jquery-timepicker": "fgelinas/timepicker#883bb2cd94". 
-  * Solution/Workaround
+  * Solution/**Workaround**
     * `nvm install 18` (will install node 18.20.8)
     * `nvm use 18.20.8`
     * `yarn install --frozen-lockfile`
