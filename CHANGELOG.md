@@ -1,6 +1,7 @@
 ## Owncloud Docker Development Environment for custom apps
 
 ### 1.1.0 (UNRELEASED)
+* [NOREF] Workaround for Calendar frontend assets build
 * [NOREF] ADDED rainloop for PHP 8 compatibility verification
 * [NOREF] ADDED tasks for PHP 8 compatibility verification
 * [NOREF] ADDED passman for PHP 8 compatibility verification
