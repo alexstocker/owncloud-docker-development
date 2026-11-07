@@ -2,14 +2,14 @@
 
 | App Name       | PHP 8.3 | can be enabled | works somewhat | OC 11 compatibility |
 |----------------|:-------:|:--------------:|:--------------:|---------------------|
-| contacts       |  `🟡`   |      `🟢`      |      `🟢`      |                     |
-| calendar       |  `🟢`   |      `🟢`      |      `🟢`      |                     |
-| passman        |  `🟡`   |      `🟢`      |      `🟢`      |                     |
-| tasks          |  `🟢`   |      `🟡`      |      `🟢`      |                     |
-| sensorlogger   |  `⚪`   |      `🟢`      |      `⚪`      |                     |
-| files_3dviewer |  `⚪`   |      `🟢`      |      `⚪`      |                     |
-| domain_manager |  `⚪`   |      `🟢`      |      `⚪`      |                     |
-| rainloop       |  `🔴`   |      `🟢`      |      `🟡`      |                     |
+| contacts       |  `🟡`   |      `🟢`      |      `🟢`      |`⚪`                     |
+| calendar       |  `🟢`   |      `🟢`      |      `🟢`      |    `⚪`                 |
+| passman        |  `🟡`   |      `🟢`      |      `🟢`      |     `⚪`                |
+| tasks          |  `🟢`   |      `🟢`      |      `🟢`      |     `⚪`                |
+| sensorlogger   |  `⚪`   |      `🟢`      |      `⚪`      |     `⚪`                |
+| files_3dviewer |  `⚪`   |      `🟢`      |      `⚪`      |     `⚪`                |
+| domain_manager |  `⚪`   |      `🟢`      |      `⚪`      |     `⚪`                |
+| rainloop       |  `🔴`   |      `🟢`      |      `🟡`      |     `⚪`                |
 
 ## Rainloop
 * Sources from https://github.com/RainLoop/rainloop-webmail/releases/tag/v1.17.0 required
@@ -17,6 +17,12 @@
   * Solution/**Workaround**
     * `include_once OC_App::getAppPath('rainloop').'/lib/RainLoopHelper.php';` to fix ownCloud 11 failed to autoload RainLoop’s legacy OC_RainLoop_Helper class when invoking its logout hook.
 * `🔴` ERR on PHP 8.3 compatibility. MUST to be fixed.
+
+### Hints
+```bash
+docker compose run --no-deps --rm node yarn install --frozen-lockfile
+make rl-build
+```
 
 ## Calendar
 * `🔴` `npm install` fails on "jquery-timepicker": "fgelinas/timepicker#883bb2cd94". 

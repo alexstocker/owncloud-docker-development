@@ -1,6 +1,7 @@
 ## Owncloud Docker Development Environment for custom apps
 
 ### 1.1.0 (UNRELEASED)
+* [NOREF] Fix PHP 8.3 ERR on Rainloop and raised OC version of tasks
 * [NOREF] Start PHP 8.3 compatibility verification
 * [NOREF] Workaround for Rainloop logout hook exception
 * [NOREF] Workaround for Calendar frontend assets build_
