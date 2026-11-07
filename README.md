@@ -14,7 +14,7 @@ Currently in Progress and testing with Owncloud Classic 11 (PHP 8.x compatible) 
 
 Others [Compatibility Checks](docs/owncloud-11-apps-compatibility.md)
 * **COMPLETE** [Contacts](https://github.com/owncloud/contacts) for Owncloud Classic 11 (PHP 8.x compatible)
-* **INPROGRESS** [Calendar](https://github.com/owncloud/calendar/) for Owncloud Classic 11 (PHP 8.x compatible)
+* **COMPLETE** [Calendar](https://github.com/owncloud/calendar/) for Owncloud Classic 11 (PHP 8.x compatible)
 * **INPROGRESS** [Passman](https://github.com/nextcloud/passman) for Owncloud Classic 11 (PHP 8.x compatible)
 * **INPROGRESS** [Tasks](https://github.com/owncloud/tasks) for Owncloud Classic 11 (PHP 8.x compatible)
 * **INPROGRESS** [Rainloop](https://www.rainloop.net/) for Owncloud Classic 11 (PHP 8.x compatible)
