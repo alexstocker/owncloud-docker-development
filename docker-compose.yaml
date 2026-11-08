@@ -51,7 +51,7 @@ services:
       - ${OWNCLOUD_ROOT}/contacts:/var/www/owncloud/apps/contacts
       - ${OWNCLOUD_ROOT}/calendar:/var/www/owncloud/apps/calendar
       - ${OWNCLOUD_ROOT}/tasks:/var/www/owncloud/apps/tasks
-      - ${OWNCLOUD_ROOT}/rainloop/build/owncloud/rainloop-app:/var/www/owncloud/apps-external/rainloop
+      - ${OWNCLOUD_ROOT}/rainloop:/var/www/owncloud/apps/rainloop
       - ${OWNCLOUD_ROOT}/passman:/var/www/owncloud/apps-external/passman
     networks:
       - default
