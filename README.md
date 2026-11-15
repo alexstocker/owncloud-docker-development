@@ -18,6 +18,11 @@ Others [Compatibility Checks](docs/owncloud-11-apps-compatibility.md)
 * **COMPLETE** [Passman](https://github.com/nextcloud/passman) for Owncloud Classic 11 (PHP 8.x compatible)
 * **COMPLETE** [Tasks](https://github.com/owncloud/tasks) for Owncloud Classic 11 (PHP 8.x compatible)
 * **COMPLETE** [Rainloop](https://www.rainloop.net/) for Owncloud Classic 11 (PHP 8.x compatible)
+* PENDING **Activity** for Owncloud Classic 11
+* PENDING **Bookmarks** for Owncloud Classic 11
+* PENDING **PDF Viewer** for Owncloud Classic 11
+* PENDING **Text Editor** for Owncloud Classic 11
+* PENDING **Video Player** for Owncloud Classic 11
 
 * but with some tweaks suitable for others too.
 
