@@ -41,6 +41,37 @@ Others [Compatibility Checks](docs/owncloud-11-apps-compatibility.md)
 5. your@machine:...owncloud-docker-development$ `sudo chown -Rf [USER]:[GROUP] vendor/` (adjust [USER] and [GROUP] to fit your needs)
 6. open browser goto http://localhost:8080/ (have a look at .env for username and password) and login
 
+### OC11 Upgrade Helpers
+
+Owncloud Classic 10.1.1 to 11.1.0 upgrade script and `owncloud_10_1_1` docker test environment
+
+* from `10.1.1` PHP `7.2`
+  * through `10.3.2` PHP `7.2`
+  * through `10.5.0` PHP `7.2`
+  * through `10.16.7` PHP `7.3`
+  * through `11.0.1` PHP `8.3`
+* to `11.1.0` PHP `8.3`
+
+by executing one script `owncloud-upgrade.sh`
+
+1. Build OC10 test environment `docker compose up -d owncloud_10_1_1`
+2. Upgrade OC10 to OC11 dry run `owncloud-upgrade.sh --oc-root /var/www/owncloud --oc-user www-data --oc-group root --data-dir /mnt/data/files --dry-run`
+
+* Composer Helper for quick wipeout `composer docker-wipeout-oc10`
+
+```bash
+docker compose up -d --build --no-deps --force-recreate owncloud_10_1_1
+owncloud-upgrade.sh --oc-root /var/www/owncloud --oc-user www-data --oc-group root \
+	--php-bin /usr/bin/php7.2 --php-bin-8.3 /usr/bin/php8.3 --php-bin-7.4 /usr/bin/php7.4 \
+	--data-dir /mnt/data/files --dry-run
+
+owncloud-upgrade.sh --oc-root /var/www/owncloud --oc-user www-data --oc-group root --data-dir /mnt/data/files --dry-run
+
+docker compose stop owncloud_10_1_1 mariadb_10_1_1 redis_10_1_1
+docker rm owncloud_server_10_1_1 owncloud_redis_10_1_1 owncloud_mariadb_10_1_1 
+docker volume rm owncloud-docker-development_owncloud_10_1_1_data owncloud-docker-development_mysql_10_1_1 owncloud-docker-development_redis_10_1_1
+```
+
 ### Usage
 
 #### Get docker containers up and running
@@ -57,7 +88,6 @@ your@machine:...owncloud-docker-development$ `composer docker-wipeout`
 
 #### Enable Custom Apps
 your@machine:...owncloud-docker-development$ `composer enable-apps`
-```
 
 #### Additions for SensorLogger
 

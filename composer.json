@@ -96,6 +96,11 @@
       "docker rm owncloud_mariadb",
       "@cleanup"
     ],
+    "docker-wipeout-oc10": [
+      "docker compose stop owncloud_10_1_1 mariadb_10_1_1 redis_10_1_1",
+      "docker rm owncloud_server_10_1_1 owncloud_redis_10_1_1 owncloud_mariadb_10_1_1",
+      "docker volume rm owncloud-docker-development_owncloud_10_1_1_data owncloud-docker-development_mysql_10_1_1 owncloud-docker-development_redis_10_1_1"
+    ],
     "xdebug-install": [
       "docker exec -tu root owncloud_server entrypoint bash -c 'apt-get update -y'",
       "docker exec -tu root owncloud_server entrypoint bash -c 'apt-get upgrade -y'",

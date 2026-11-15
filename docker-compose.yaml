@@ -3,11 +3,17 @@ version: '3.8'
 volumes:
   files:
     driver: local
+  owncloud_10_1_1_data:
+    driver: local
   mysql:
+    driver: local
+  mysql_10_1_1:
     driver: local
   backup:
     driver: local
   redis:
+    driver: local
+  redis_10_1_1:
     driver: local
   builder:
     driver: local
@@ -55,6 +61,73 @@ services:
       - ${OWNCLOUD_ROOT}/passman:/var/www/owncloud/apps-external/passman
     networks:
       - default
+
+  owncloud_10_1_1:
+    image: owncloud/server:10.1.1-php-matrix-test
+    build:
+      context: .
+      dockerfile: docker/owncloud-10.1.1/Dockerfile
+    container_name: owncloud_server_10_1_1
+    restart: always
+    ports:
+      - "${LEGACY_HTTP_PORT:-8081}:8080"
+    depends_on:
+      - mariadb_10_1_1
+      - redis_10_1_1
+    environment:
+      - OWNCLOUD_DOMAIN=${LEGACY_OWNCLOUD_DOMAIN:-localhost:8081}
+      - OWNCLOUD_TRUSTED_DOMAINS=${LEGACY_OWNCLOUD_TRUSTED_DOMAINS:-localhost,127.0.0.1}
+      - OWNCLOUD_DB_TYPE=mysql
+      - OWNCLOUD_DB_NAME=owncloud
+      - OWNCLOUD_DB_USERNAME=owncloud
+      - OWNCLOUD_DB_PASSWORD=owncloud
+      - OWNCLOUD_DB_HOST=mariadb_10_1_1
+      - OWNCLOUD_ADMIN_USERNAME=${ADMIN_USERNAME}
+      - OWNCLOUD_ADMIN_PASSWORD=${ADMIN_PASSWORD}
+      - OWNCLOUD_MYSQL_UTF8MB4=true
+      - OWNCLOUD_REDIS_ENABLED=true
+      - OWNCLOUD_REDIS_HOST=redis_10_1_1
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "--silent", "--output", "/dev/null", "http://localhost:8080/status.php"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    volumes:
+      - owncloud_10_1_1_data:/mnt/data
+      - ./scripts/owncloud-upgrade.sh:/usr/local/bin/owncloud-upgrade.sh:rw
+    networks:
+      - default
+
+  mariadb_10_1_1:
+    image: mariadb:10.5
+    container_name: owncloud_mariadb_10_1_1
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=owncloud
+      - MYSQL_USER=owncloud
+      - MYSQL_PASSWORD=owncloud
+      - MYSQL_DATABASE=owncloud
+    command: ["--max-allowed-packet=128M", "--innodb-log-file-size=64M"]
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "--host=127.0.0.1", "--silent"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - mysql_10_1_1:/var/lib/mysql
+
+  redis_10_1_1:
+    image: redis:6
+    container_name: owncloud_redis_10_1_1
+    restart: always
+    command: ["--databases", "1"]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - redis_10_1_1:/data
 
   mariadb:
     image: mariadb:10.11
