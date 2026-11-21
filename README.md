@@ -57,7 +57,9 @@ your@machine:...owncloud-docker-development$ `composer docker-wipeout`
 
 #### Enable Custom Apps
 your@machine:...owncloud-docker-development$ `composer enable-apps`
-```
+
+#### Install and Enable xdebug
+your@machine:...owncloud-docker-development$ `composer install-xdebug`
 
 #### Additions for SensorLogger
 

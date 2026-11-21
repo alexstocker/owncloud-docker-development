@@ -100,7 +100,7 @@
       "docker exec -tu root owncloud_server entrypoint bash -c 'apt-get update -y'",
       "docker exec -tu root owncloud_server entrypoint bash -c 'apt-get upgrade -y'",
       "docker exec -tu root owncloud_server entrypoint bash -c 'apt-get install -y mc iputils-ping php8.3-xdebug'",
-      "docker exec -tu root owncloud_server entrypoint bash -c 'echo \"xdebug.remote_enable=1\" >> /etc/php/8.3/apache2/conf.d/20-xdebug.ini && echo \"xdebug.remote_autostart=1\" >> /etc/php/8.3/apache2/conf.d/20-xdebug.ini && echo \"xdebug.remote_port=9003\" >> /etc/php/8.3/apache2/conf.d/20-xdebug.ini && echo \"xdebug.remote_connect_back=1\" >> /etc/php/8.3/apache2/conf.d/20-xdebug.ini'"
+      "docker exec -tu root owncloud_server entrypoint bash -c 'printf \"%s\\n\" \"zend_extension=xdebug.so\" \"xdebug.mode=debug,develop\" \"xdebug.start_with_request=yes\" \"xdebug.client_host=xdebug://gateway\" \"xdebug.client_port=9003\" > /etc/php/8.3/mods-available/xdebug.ini && rm -f /etc/php/8.3/apache2/conf.d/99-xdebug.ini && kill -USR1 \"$(cat /run/apache2/apache2.pid)\"'"
     ],
     "enable-apps": [
       "docker cp overwrite.config.php.dist owncloud_server:/mnt/data/config/overwrite.config.php",
