@@ -8,7 +8,7 @@ Created and tested for use with Ubuntu 26.04. But should work on any system supp
 
 Currently in Progress and testing with Owncloud Classic 11 (PHP 8.x compatible) and Owncloud 10.13.4 (PHP 7.4 compatible).
 
-* PENDING [SensorLogger](https://marketplace.owncloud.com/apps/sensorlogger/) for Owncloud Classic 11 (PHP 8.x compatible)
+* **INPROGRESS** [SensorLogger](https://marketplace.owncloud.com/apps/sensorlogger/) for Owncloud Classic 11 (PHP 8.x compatible)
 * PENDING [3D File Viewer](https://marketplace.owncloud.com/apps/files_3dviewer/) for Owncloud Classic 11 (PHP 8.x compatible)
 * PENDING [Domain Manager](https://github.com/alexstocker/domain-manager-for-owncloud/tree/0.1-devel) for Owncloud Classic 11 (PHP 8.x compatible)
 
