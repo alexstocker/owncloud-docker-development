@@ -1,6 +1,8 @@
 ## Owncloud Docker Development Environment for custom apps
 
 ### 1.1.0 (UNRELEASED)
+* [NOREF] Established SensorLogger OC11 and PHP 8.3 compatibility
+* [NOREF] IMPROVED xdebug install script for 3.2
 * [NOREF] ADDED Rainloop for PHP 8 compatibility verification
 * [NOREF] ADDED Tasks for PHP 8 compatibility verification
 * [NOREF] ADDED Passmann for PHP 8 compatibility verification
@@ -10,11 +12,6 @@
 * [NOREF] Start PHP 8.3 compatibility verification
 * [NOREF] Workaround for Rainloop logout hook exception
 * [NOREF] Workaround for Calendar frontend assets build_
-* [NOREF] ADDED rainloop for PHP 8 compatibility verification
-* [NOREF] ADDED tasks for PHP 8 compatibility verification
-* [NOREF] ADDED passman for PHP 8 compatibility verification
-* [NOREF] ADDED Calendar for PHP 8 compatibility verification
-* [NOREF] ADDED Contacts for PHP 8 compatibility verification
 * [NOREF] UPDATE to Owncloud 11
 
 ### 1.0.1 (UNRELEASED)
