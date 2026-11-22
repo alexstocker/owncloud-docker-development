@@ -1,6 +1,7 @@
 ## Owncloud Docker Development Environment for custom apps
 
 ### 1.1.0 (UNRELEASED)
+* [NOREF] Added .env vars regarding SensorLogger API demo scripts
 * [NOREF] Established SensorLogger OC11 and PHP 8.3 compatibility
 * [NOREF] IMPROVED xdebug install script for 3.2
 * [NOREF] ADDED Rainloop for PHP 8 compatibility verification

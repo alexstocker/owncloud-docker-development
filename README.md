@@ -61,44 +61,39 @@ your@machine:...owncloud-docker-development$ `composer enable-apps`
 #### Install and Enable xdebug
 your@machine:...owncloud-docker-development$ `composer install-xdebug`
 
-#### Additions for SensorLogger
+#### SensorLogger API integration tests
 
-##### Setup a device (simple)
-1. Got to Settings->Security
-2. Create a new App `password/passcode`
-3. Edit `sensorlogger/test/curl/post.php` using an editor or of your choice (vi, mc, pico, gedit, notepad, phpstorm, netbeans, eclipse)
-4. Modify `$token` variable. Replace the existing string by the `passcode` you created two steps earlier
-5. your@machine:...owncloud-docker-development$ `php ./sensorlogger/tests/curl/post.php`
-   > Result/Response `{"success":true,"message":"Sensor Log successfully stored","data":null}`
-   > more about the `API` please read the docs https://github.com/alexstocker/sensorlogger/wiki/API
-6. Done
+The SensorLogger API integration suite exercises device registration, data-type lookup, and extended log storage against the ownCloud database. Run it from the development checkout with:
 
-Now you have a fake sensor device named `Default device`. 
-* to view and edit device properties such as Group and Type got to `SensorLogger->Devices`
-* to view data got to `SensorLogger->List`
-* to add dashboard widget got to `SensorLogger->Dashboard`
-  > more about `Dashboard Widgets` please read the docs https://github.com/alexstocker/sensorlogger/wiki/Users
+```sh
+docker exec -u www-data -w /var/www/owncloud/apps-external/sensorlogger \
+  owncloud_server env OWNCLOUD_ROOT=/var/www/owncloud \
+  vendor/bin/phpunit -c phpunit.integration.xml
+```
 
-###### Creating fake sensor data in a loop
-`while [ 1 ]; do clear; php ./sensorlogger/tests/curl/post.php; sleep 5; done;`
+The suite creates unique test records inside a database transaction and rolls them back, so it does not require an ownCloud app password or leave test data behind. For unit tests and coverage, see the [SensorLogger development guide](https://github.com/alexstocker/sensorlogger#development-and-unit-tests).
 
-##### Setup a device (extend)
-1. Got to Settings->Security
-2. Create a new App `password/passcode`
-3. Edit `sensorlogger/test/curl/register_extend.php` using an editor or of your choice (vi, mc, pico, gedit, notepad, phpstorm, netbeans, eclipse)
-4. Modify `$token` variable. Replace the existing string by the `passcode` you created two steps earlier
-5. your@machine:...owncloud-docker-development$ `php ./sensorlogger/tests/curl/register_extend.php`
-   > Result/Response `{"success":true,"message":"Device successfully registered","data":[{"id":"1","description":"Temperatur","type":"temperature","short":"\u00b0C"},{"id":"2","description":"Luftfeuchtigkeit","type":"humidity","short":"% r.F."},{"id":"3","description":"Carbon dioxide","type":"CO2","short":"ppm"}]}`
-6. Edit `sensorlogger/test/curl/post_extend.php`
-7. Modify `$token` variable. Replace the existing string by the `passcode` you created two steps earlier
-   a. Additional: Modify `dataTypeIds` if not equal to the ids shown in the Result/Response above (5.)
-8. your@machine:...owncloud-docker-development$ `php ./sensorlogger/tests/curl/post_extend.php`
-   > Result/Response `{"success":true,"message":"Sensor Log successfully stored","data":[{"dataTypeId":1,"value":23.6},{"dataTypeId":2,"value":12.2},{"dataTypeId":3,"value":865.9}]}`
-   > more about the `API` please read the docs https://github.com/alexstocker/sensorlogger/wiki/API
-9. Done
+#### SensorLogger API demo scripts
 
-###### Creating fake sensor data in a loop
-`while [ 1 ]; do clear; php ./sensorlogger/tests/curl/post_extend.php; sleep 5; done;`
+The `sensorlogger/scripts/` directory contains interactive-use examples for registering a demo device, listing its data types, and sending simulated basic or extended readings. These scripts send real requests to ownCloud and store sensor data. The development `.env` is created from `.env.default`. Add or update these entries in `.env` (existing `.env` files are not overwritten when defaults change):
+
+```sh
+SENSORLOGGER_URL=http://localhost:8080
+SENSORLOGGER_USERNAME=admin
+SENSORLOGGER_APP_PASSWORD=your-ownCloud-app-password
+SENSORLOGGER_DEVICE_ID=
+```
+
+Use an app password created in ownCloud's Security settings, not `ADMIN_PASSWORD`. Then run:
+
+```sh
+php sensorlogger/scripts/sensorlogger-demo.php register
+php sensorlogger/scripts/sensorlogger-demo.php types
+php sensorlogger/scripts/sensorlogger-demo.php extended
+php sensorlogger/scripts/sensorlogger-demo.php basic
+```
+
+The script reads `SENSORLOGGER_*` values from `.env`; after registration, save the printed device ID as `SENSORLOGGER_DEVICE_ID` there before using the `types` or `extended` commands. Shell environment values override `.env` if you prefer not to edit it. The basic command can run without registering a device first. To send readings continuously, use `sensorlogger/scripts/sensorlogger-demo.sh basic [interval-seconds]` or `sensorlogger/scripts/sensorlogger-demo.sh extended [interval-seconds]`; stop the loop with Ctrl-C. The extended loop requires a registered device ID. Both scripts default to `http://localhost:8080` and require PHP's cURL extension.
 
 #### Additions for 3D File Viewer
 

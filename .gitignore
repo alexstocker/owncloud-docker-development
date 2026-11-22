@@ -14,3 +14,4 @@ rainloop
 passman
 rainloop_src
 /sensorlogger/.phpunit.result.cache
+/sensorlogger_wiki/
